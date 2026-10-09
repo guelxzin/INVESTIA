@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: investia
+    runtime: docker
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase: {name: investia-db, property: connectionString}
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: https://investia.onrender.com
+      - key: BRAPI_TOKEN
+        sync: false
+databases:
+  - name: investia-db
+    plan: free
